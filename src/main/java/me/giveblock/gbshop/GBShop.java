@@ -3,19 +3,20 @@ package me.giveblock.gbshop;
 import me.giveblock.gbshop.commands.Shop;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Main extends JavaPlugin {
+public final class GBShop extends JavaPlugin {
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getLogger().info("ShopGUI Enabled");
+        registerCommands();
 
+        getLogger().info("GBShop Enabled");
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        getLogger().info("ShopGUI Disabled");
+        getLogger().info("GBShop Disabled");
     }
 
     private void registerCommands() {
