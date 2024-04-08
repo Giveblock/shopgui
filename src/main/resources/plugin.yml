@@ -1,6 +1,6 @@
 name: GBShop
 version: '${project.version}'
-main: me.giveblock.shopgui.Main
+main: me.giveblock.gbshop.Main
 api-version: '1.20'
 
 commands:
@@ -12,4 +12,6 @@ commands:
       - 'gbshop'
 
 permissions:
-  shopgui
+  gbshop:
+    description: 'Default Shop Command'
+    default: true
