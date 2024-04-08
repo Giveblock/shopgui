@@ -1,6 +1,6 @@
 name: GBShop
 version: '1.0-SNAPSHOT'
-main: me.giveblock.gbshop.Main
+main: me.giveblock.gbshop.GBShop
 api-version: '1.20'
 
 commands:
