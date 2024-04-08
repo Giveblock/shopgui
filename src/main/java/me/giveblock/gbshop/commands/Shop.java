@@ -1,12 +1,14 @@
 package me.giveblock.gbshop.commands;
 
+import me.giveblock.gbshop.Main;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Shop {
+public class Shop implements CommandExecutor {
 
-
+    public Shop(Main plugin) {}
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
