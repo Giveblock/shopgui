@@ -1,0 +1,4 @@
+name: ShopGUI
+version: '${project.version}'
+main: me.giveblock.shopgui.Main
+api-version: '1.20'
