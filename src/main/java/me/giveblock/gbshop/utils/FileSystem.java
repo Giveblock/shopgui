@@ -23,5 +23,8 @@ public class FileSystem {
 
     }
 
+    public static void reload() {
+        shop = Json.load(shopFile);
+    }
 
 }
