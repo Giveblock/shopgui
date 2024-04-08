@@ -1,4 +1,17 @@
-name: ShopGUI
+name: GBShop
 version: '1.0-SNAPSHOT'
-main: me.giveblock.shopgui.Main
+main: me.giveblock.gbshop.Main
 api-version: '1.20'
+
+commands:
+  shop:
+    description: "Default Shop Command"
+    usage: /<command>
+    aliases:
+      - 'shopgui'
+      - 'gbshop'
+
+permissions:
+  gbshop:
+    description: 'Default Shop Command'
+    default: true
