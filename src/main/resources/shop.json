@@ -1,5 +1,8 @@
 {
-  "gui-size": 45,
+  "shop-home": {
+    "gui-size": 45,
+    "skull-slot": 34
+  },
   "categories": {
     "blocks": {
       "slot": 10,
