@@ -1,6 +1,7 @@
 package me.giveblock.gbshop.commands;
 
 import me.giveblock.gbshop.GBShop;
+import me.giveblock.gbshop.api.gui.ShopHome;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +16,7 @@ public class Shop implements CommandExecutor {
             Player player = (Player) sender;
             if (command.getName().equalsIgnoreCase("shop")) {
                 if (args.length == 0) {
-                    player.sendMessage("test success");
+                    player.openInventory(ShopHome.gui(player));
                     return true;
                 }
 

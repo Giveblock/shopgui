@@ -1,10 +1,11 @@
 {
+  "gui-size": 45,
   "categories": {
     "blocks": {
-      "position": 10,
+      "slot": 10,
       "menu-item": {
         "id": "grass_block",
-        "name": "§a§lBlocks",
+        "name": "&a&lBlocks",
         "lore": [
           "line 1",
           "line 2",
@@ -31,6 +32,28 @@
         "stone": {
           "buy": 2,
           "sell": 1
+        }
+      }
+    },
+    "minerals": {
+      "slot": 13,
+      "menu-item": {
+        "id": "diamond",
+        "name": "&b&lMinerals",
+        "lore": [
+          "line1",
+          "line2",
+          "line3"
+        ]
+      },
+      "items": {
+        "diamond": {
+          "buy": 100,
+          "sell": 50
+        },
+        "emerald": {
+          "buy": 100,
+          "sell": 0
         }
       }
     }

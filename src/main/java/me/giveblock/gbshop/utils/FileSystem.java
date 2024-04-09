@@ -11,6 +11,7 @@ public class FileSystem {
 
     private static final Plugin pl = GBShop.getPlugin(GBShop.class);
 
+    public static FileConfiguration config = pl.getConfig();
     public static JsonObject shop;
     private static final File shopFile = new File(pl.getDataFolder(), "shop.json");
 
@@ -25,6 +26,7 @@ public class FileSystem {
 
     public static void reload() {
         shop = Json.load(shopFile);
+        pl.reloadConfig();
     }
 
 }
