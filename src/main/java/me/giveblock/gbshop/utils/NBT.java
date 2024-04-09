@@ -16,12 +16,6 @@ public class NBT {
         return nmsItem.w();
     }
 
-    public static void addString(ItemStack item, String tag, String val) {
-
-
-
-    }
-
     public static void addTag(NBTTagCompound compound, String tag, Object o) {
         if (o instanceof String) {
             compound.a(tag, NBTTagString.a((String)o));

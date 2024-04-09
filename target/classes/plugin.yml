@@ -11,7 +11,16 @@ commands:
       - 'shopgui'
       - 'gbshop'
 
+  test:
+    description: "Test Command"
+    usage: /<command>
+
 permissions:
-  gbshop:
+  gbshop.shop:
     description: 'Default Shop Command'
     default: true
+
+  gbshop.test:
+    description: 'Test Command'
+    default: true
+

@@ -5,6 +5,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import me.giveblock.gbshop.api.helpers.ItemHelper;
 import me.giveblock.gbshop.utils.FileSystem;
+import me.giveblock.gbshop.utils.NBT;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
@@ -14,6 +16,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -29,26 +32,29 @@ public class ShopHome {
 
     }
 
-
     private static void getItems(Inventory inv, Player p) {
         JsonObject categories = FileSystem.shop.getAsJsonObject("categories");
-        for (String key : categories.keySet()) {
-            JsonObject category = categories.getAsJsonObject(key);
-            int slot = category.get("slot").getAsInt();
-            inv.setItem(slot, categoryItem(category.getAsJsonObject("menu-item")));
+        for (String category : categories.keySet()) {
+            categoryItem(categories, category, inv);
         }
 
         int skullSlot = FileSystem.shop.getAsJsonObject("shop-home").get("skull-slot").getAsInt();
         inv.setItem(skullSlot, homeSkull(p));
 
     }
-    private static ItemStack categoryItem(JsonObject o) {
-        String material = o.get("id").getAsString();
+    private static void categoryItem(JsonObject categories, String category, Inventory inv) {
+        JsonObject o = categories.getAsJsonObject(category).getAsJsonObject("menu-item");
+        int slot = o.get("slot").getAsInt();
+        Material material = Material.matchMaterial(o.get("id").getAsString().toUpperCase());
         String name = o.get("name").getAsString();
         name = name.replace("&", "§");
         JsonArray lore = o.getAsJsonArray("lore");
 
-        ItemStack item = new ItemStack(Material.matchMaterial(material.toUpperCase()));
+        NBTTagCompound tag = new NBTTagCompound();
+        NBT.addTag(tag, "type", "category");
+        NBT.addTag(tag, "category", category);
+
+        ItemStack item = NBT.getItem(tag, new ItemStack(material));
         ItemMeta meta = item.getItemMeta();
 
         meta.setDisplayName(name);
@@ -62,7 +68,8 @@ public class ShopHome {
 
         }
         item.setItemMeta(meta);
-        return item;
+        inv.setItem(slot, item);
+
     }
     private static ItemStack homeSkull(Player p) {
         ItemStack skull = ItemHelper.shopSkull(p);
@@ -80,6 +87,17 @@ public class ShopHome {
     }
 
 
-
+    public static void onClick(InventoryClickEvent e) {
+        Inventory inv = e.getClickedInventory();
+        int slot = e.getSlot();
+        assert inv != null;
+        ItemStack item = inv.getItem(slot);
+        String type = NBT.getString(item, "type");
+        if (type.equalsIgnoreCase("category")) {
+            String category = NBT.getString(item, "category");
+            Player p = (Player) e.getWhoClicked();
+            p.openInventory(ShopCategory.gui(p, item));
+        }
+    }
 
 }

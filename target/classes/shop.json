@@ -5,8 +5,8 @@
   },
   "categories": {
     "blocks": {
-      "slot": 10,
       "menu-item": {
+        "slot": 10,
         "id": "grass_block",
         "name": "&a&lBlocks",
         "lore": [
@@ -39,8 +39,8 @@
       }
     },
     "minerals": {
-      "slot": 13,
       "menu-item": {
+        "slot": 13,
         "id": "diamond",
         "name": "&b&lMinerals",
         "lore": [
