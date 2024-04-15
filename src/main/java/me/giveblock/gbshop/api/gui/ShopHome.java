@@ -3,21 +3,18 @@ package me.giveblock.gbshop.api.gui;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import me.giveblock.gbshop.api.helpers.ItemHelper;
+import me.giveblock.gbshop.api.helpers.ShopHelper;
 import me.giveblock.gbshop.utils.FileSystem;
 import me.giveblock.gbshop.utils.NBT;
 import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ShopHome {
@@ -39,7 +36,7 @@ public class ShopHome {
         }
 
         int skullSlot = FileSystem.shop.getAsJsonObject("shop-home").get("skull-slot").getAsInt();
-        inv.setItem(skullSlot, homeSkull(p));
+        inv.setItem(skullSlot, ShopHelper.shopSkull(p));
 
     }
     private static void categoryItem(JsonObject categories, String category, Inventory inv) {
@@ -70,20 +67,6 @@ public class ShopHome {
         item.setItemMeta(meta);
         inv.setItem(slot, item);
 
-    }
-    private static ItemStack homeSkull(Player p) {
-        ItemStack skull = ItemHelper.shopSkull(p);
-        ItemMeta meta = skull.getItemMeta();
-
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add("§f- §aBalance§f: ");
-
-        assert meta != null;
-        meta.setLore(lore);
-        skull.setItemMeta(meta);
-
-        return skull;
     }
 
 

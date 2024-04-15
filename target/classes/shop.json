@@ -35,6 +35,14 @@
         "stone": {
           "buy": 2,
           "sell": 1
+        },
+        "stone": {
+          "buy": 2,
+          "sell": 1
+        },
+        "stone": {
+          "buy": 2,
+          "sell": 1
         }
       }
     },
