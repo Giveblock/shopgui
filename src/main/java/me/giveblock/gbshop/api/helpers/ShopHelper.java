@@ -30,16 +30,16 @@ public class ShopHelper {
         item.setItemMeta(skullMeta);
         return item;
     }
-
     public static ItemStack compass() {
         ItemStack item = new ItemStack(Material.COMPASS);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName("§c§lGo Back");
+        meta.setDisplayName("§cGo Back");
         item.setItemMeta(meta);
 
         return item;
     }
+
 
     public static String formatPrice(double price) {
         if (price%1 != 0 || price < 1) {

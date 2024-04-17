@@ -21,7 +21,7 @@ public class ShopHome {
 
     public static Inventory gui(Player p) {
         int size = FileSystem.shop.getAsJsonObject("shop-home").get("gui-size").getAsInt();
-        Inventory gui = Bukkit.createInventory(null, size, "§lShopGUI §8- §lHome");
+        Inventory gui = Bukkit.createInventory(null, size, "§8§lShopGUI §8- §lHome");
 
         getItems(gui, p);
 
@@ -79,7 +79,7 @@ public class ShopHome {
         if (type.equalsIgnoreCase("category")) {
             String category = NBT.getString(item, "category");
             Player p = (Player) e.getWhoClicked();
-            p.openInventory(ShopCategory.gui(p, item));
+            p.openInventory(ShopCategory.gui(p, category, 0));
         }
     }
 

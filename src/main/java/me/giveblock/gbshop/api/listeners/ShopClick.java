@@ -1,5 +1,6 @@
 package me.giveblock.gbshop.api.listeners;
 
+import me.giveblock.gbshop.api.gui.ShopCategory;
 import me.giveblock.gbshop.api.gui.ShopHome;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,8 +24,13 @@ public class ShopClick implements Listener {
         String title = e.getView().getTitle();
         if (title.contains("ShopGUI")) {
             e.setCancelled(true);
-            if (title.endsWith("Home") && isItem(e)) {
-                ShopHome.onClick(e);
+            if (isItem(e)) {
+                if (title.endsWith("Home") && isItem(e)) {
+                    ShopHome.onClick(e);
+                }
+                if (title.endsWith("Category") && isItem(e)) {
+                    ShopCategory.onClick(e);
+                }
             }
         }
 
