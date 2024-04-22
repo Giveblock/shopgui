@@ -33,7 +33,6 @@ public class NBT {
             compound.a(tag, NBTTagLong.a((Long)o));
         }
     }
-
     public static ItemStack addTag(ItemStack item, String tag, Object o) {
         net.minecraft.world.item.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
         NBTTagCompound compound = nmsItem.w();
@@ -58,7 +57,6 @@ public class NBT {
         NBTTagCompound compound = nmsItem.w();
         return compound.k(tag);
     }
-
 
 
 

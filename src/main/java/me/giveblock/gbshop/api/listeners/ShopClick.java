@@ -2,6 +2,7 @@ package me.giveblock.gbshop.api.listeners;
 
 import me.giveblock.gbshop.api.gui.ShopCategory;
 import me.giveblock.gbshop.api.gui.ShopHome;
+import me.giveblock.gbshop.api.gui.ShopItem;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -30,6 +31,9 @@ public class ShopClick implements Listener {
                 }
                 if (title.endsWith("Category") && isItem(e)) {
                     ShopCategory.onClick(e);
+                }
+                if (title.endsWith("Item") && isItem(e)) {
+                    ShopItem.onClick(e);
                 }
             }
         }

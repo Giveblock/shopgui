@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import me.giveblock.gbshop.api.helpers.ShopHelper;
 import me.giveblock.gbshop.utils.FileSystem;
 import me.giveblock.gbshop.utils.NBT;
+import net.minecraft.nbt.NBTTagCompound;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -33,6 +34,9 @@ public class ShopCategory {
         assert inv != null;
         ItemStack item = inv.getItem(slot);
 
+        if (slot >=0 && slot < 45) {
+            p.openInventory(ShopItem.gui(p, item));
+        }
 
         //Toolbar
         if (slot == 45) {
@@ -71,27 +75,33 @@ public class ShopCategory {
 
         for (int i = start; i < end; i++) {
             String name = names[i];
-            ItemStack item = shopItem(name, items.getAsJsonObject(name));
+            ItemStack item = shopItem(name, items.getAsJsonObject(name), category, page);
             if (item != null) {
                 inv.addItem(item);
             }
         }
     }
-    private static ItemStack shopItem(String name, JsonObject itemInfo) {
+    private static ItemStack shopItem(String name, JsonObject itemInfo, String category, int page) {
         Material material = Material.matchMaterial(name);
+        double buy = itemInfo.get("buy").getAsDouble();
+        double sell = itemInfo.get("sell").getAsDouble();
+
         if (material == null) {Bukkit.getLogger().info(name.toUpperCase() + " WAS SHOP ERROR");}
         if (material != null) {
-            ItemStack item = new ItemStack(material);
+            NBTTagCompound tag = NBT.getCompound(new ItemStack(material));
+            NBT.addTag(tag, "category", category);
+            NBT.addTag(tag, "page", page);
+            NBT.addTag(tag, "buy", buy);
+            NBT.addTag(tag, "sell", sell);
+
+            ItemStack item = NBT.getItem(tag, new ItemStack(material));
             ItemMeta meta = item.getItemMeta();
 
-            double buy = itemInfo.get("buy").getAsDouble();
-            double sell = itemInfo.get("sell").getAsDouble();
-
             ArrayList<String> lore = new ArrayList<>();
-            lore.add(" ");
             lore.add("§f- §7Buy§f: §f$§a" + ShopHelper.formatPrice(buy));
-            lore.add("§f- §7Sell§f: §f$§c" + ShopHelper.formatPrice(sell));
-
+            if (sell != 0) {
+                lore.add("§f- §7Sell§f: §f$§c" + ShopHelper.formatPrice(sell));
+            }
             meta.setLore(lore);
             item.setItemMeta(meta);
 
